@@ -19,6 +19,7 @@ namespace VendasWebMVC.Models
         [DisplayName("Data de Nascimento")]
         public DateTime BirthDate { get; set; }
         public Department Department { get; set; }
+        public int DepartmentId { get; set; }
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
 
         public Seller()
