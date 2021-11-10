@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace VendasWebMVC.Models
@@ -7,9 +8,15 @@ namespace VendasWebMVC.Models
     public class Seller
     {
         public int Id { get; set; }
+
+        [DisplayName("Nome")]
         public string Name { get; set; }
         public string Email { get; set; }
+
+        [DisplayName("Salário Base")]
         public double BaseSalary { get; set; }
+
+        [DisplayName("Data de Nascimento")]
         public DateTime BirthDate { get; set; }
         public Department Department { get; set; }
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();

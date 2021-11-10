@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VendasWebMVC.Data;
 using VendasWebMVC.Models;
+using VendasWebMVC.Services;
 
 namespace VendasWebMVC
 {
@@ -23,10 +24,16 @@ namespace VendasWebMVC
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<VendasWebMVCContext>(options =>
+            #region DbContext
+                services.AddDbContext<VendasWebMVCContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("VendasWebMVCContext")));
+            #endregion
 
+            #region Services
             services.AddScoped<SeedingService>();
+                services.AddScoped<SellerService>();
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

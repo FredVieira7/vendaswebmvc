@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace VendasWebMVC.Models
@@ -7,6 +8,7 @@ namespace VendasWebMVC.Models
     public class Department
     {
         public int Id { get; set; }
+        [DisplayName("Nome do Departamento")]
         public string Nome { get; set; }
         public ICollection<Seller> Sellers { get; set; } = new List<Seller>();
 
