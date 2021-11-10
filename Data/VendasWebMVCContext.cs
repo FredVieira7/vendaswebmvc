@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace VendasWebMVC.Data
+namespace VendasWebMVC.Models
 {
     public class VendasWebMVCContext : DbContext
     {
