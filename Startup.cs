@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using ElmahCore.Mvc;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,13 @@ namespace VendasWebMVC
                 services.AddScoped<DepartmentService>();
             #endregion
 
+            #region LogErrorElmah
+                services.AddElmah<SqlErrorLog>(options =>
+                {
+                    options.LogPath = "~/log";
+                });
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +65,7 @@ namespace VendasWebMVC
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseElmah();
 
             app.UseEndpoints(endpoints =>
             {
