@@ -1,4 +1,6 @@
-﻿using ElmahCore.Mvc;
+﻿using ElmahCore;
+using ElmahCore.Mvc;
+using ElmahCore.Sql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
