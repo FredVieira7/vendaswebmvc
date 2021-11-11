@@ -11,16 +11,23 @@ namespace VendasWebMVC.Models
         public int Id { get; set; }
 
         [DisplayName("Nome")]
+        [Required(ErrorMessage = "O campo nome é obrigatório.")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "O tamanho do campo nome deve ser entre {2} e {1} caracteres.")]
         public string Name { get; set; }
 
         [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "O campo e-mail é obrigatório.")]
+        [EmailAddress(ErrorMessage = "Entre com um e-mail válido.")]
         public string Email { get; set; }
 
         [DisplayName("Salário Base")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
+        [Required(ErrorMessage = "O campo salário base é obrigatório.")]
+        [Range(100.0, 50000.0, ErrorMessage = "O valor do salário do vendedor deve estar entre 100,00 e 50000,00 reais.")]
         public double BaseSalary { get; set; }
 
         [DisplayName("Data de Nascimento")]
+        [Required(ErrorMessage = "O campo data de nascimento é obrigatório.")]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public Department Department { get; set; }
