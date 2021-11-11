@@ -42,7 +42,7 @@ namespace VendasWebMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult DeleteSeller(int? id)
+        public IActionResult Delete(int? id)
         {
             if(id == null)
             {
@@ -57,6 +57,14 @@ namespace VendasWebMVC.Controllers
             }
 
             return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _sellerService.RemoveSeller(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
