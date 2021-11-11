@@ -41,5 +41,22 @@ namespace VendasWebMVC.Controllers
             _sellerService.InsertSeller(seller);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult DeleteSeller(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _sellerService.FindById(id.Value);
+
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
     }
 }
