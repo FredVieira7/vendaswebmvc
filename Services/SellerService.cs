@@ -35,10 +35,17 @@ namespace VendasWebMVC.Services
 
         public async Task RemoveSellerAsync(int id)
         {
-            var obj = await _context.Seller.FindAsync(id);
+            try
+            {
+                var obj = await _context.Seller.FindAsync(id);
 
-            _context.Seller.Remove(obj);
-            await _context.SaveChangesAsync();
+                _context.Seller.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                throw new IntegrityException("Erro ao excluir vendedor(a), o mesmo possui vendas cadastradas no sistema");
+            }
         }
 
         public async Task UpdateAsync(Seller obj)
