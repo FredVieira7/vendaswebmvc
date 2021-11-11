@@ -1,13 +1,11 @@
-﻿using ElmahCore;
-using ElmahCore.Mvc;
-using ElmahCore.Sql;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VendasWebMVC.Data;
+using VendasWebMVC.Middleware;
 using VendasWebMVC.Models;
 using VendasWebMVC.Services;
 
@@ -38,13 +36,6 @@ namespace VendasWebMVC
                 services.AddScoped<DepartmentService>();
             #endregion
 
-            #region LogErrorElmah
-                services.AddElmah<SqlErrorLog>(options =>
-                {
-                    options.LogPath = "~/log";
-                });
-            #endregion
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,13 +52,15 @@ namespace VendasWebMVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseElmah();
 
             app.UseEndpoints(endpoints =>
             {
@@ -75,6 +68,7 @@ namespace VendasWebMVC
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            
         }
     }
 }
